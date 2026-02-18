@@ -1,0 +1,27 @@
+C4Container
+    title Container Diagram — IG Clone (Angular 17)
+
+    Person(user, "User", "Interacts with the app via browser.")
+
+    System_Ext(cloudinary, "Cloudinary", "Hosts all images (profiles, posts, stories).")
+
+    System_Boundary(igClone, "IG Clone SPA") {
+        Container(angularApp, "Angular SPA", "Angular 17, TypeScript", "Bootstrapped via AppModule. Handles routing, rendering and all UI logic. No backend — data is generated in-memory.")
+        Container(appModule, "AppModule", "Angular NgModule", "Declares all components. Imports BrowserModule, RouterModule, FormsModule, ReactiveFormsModule.")
+        Container(userService, "UserService", "Angular Injectable Service", "Single source of truth. Creates mock users, feed posts, stories. Handles search, likes, comments, and profile selection.")
+        Container(redirectsService, "RedirectsService", "Angular Injectable Service", "Wraps Angular Router for programmatic navigation.")
+    }
+
+    Rel(user, angularApp, "Uses", "Browser")
+    Rel(angularApp, appModule, "Bootstrapped by")
+    Rel(appModule, userService, "Provides")
+    Rel(appModule, redirectsService, "Provides")
+    Rel(angularApp, cloudinary, "Loads images")
+
+    UpdateRelStyle(user, angularApp, $textColor="black", $lineColor="gray", $offsetX="-30", $offsetY="-15")
+    UpdateRelStyle(angularApp, appModule, $textColor="black", $lineColor="gray", $offsetX="-50", $offsetY="-15")
+    UpdateRelStyle(appModule, userService, $textColor="black", $lineColor="gray", $offsetX="-30", $offsetY="-15")
+    UpdateRelStyle(appModule, redirectsService, $textColor="black", $lineColor="gray", $offsetX="-30", $offsetY="-15")
+    UpdateRelStyle(angularApp, cloudinary, $textColor="black", $lineColor="gray", $offsetX="-40", $offsetY="-15")
+
+    UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="1")

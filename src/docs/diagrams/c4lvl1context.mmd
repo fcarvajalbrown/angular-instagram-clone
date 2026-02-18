@@ -1,0 +1,16 @@
+C4Context
+    title System Context — IG Clone (Angular 17)
+
+    Person(user, "User", "Browses feed, stories, profiles, likes and comments on posts.")
+
+    System(igClone, "IG Clone SPA", "Single-page application that replicates core Instagram features: feed, stories, profiles, and search.")
+
+    System_Ext(cloudinary, "Cloudinary", "External CDN that hosts all user profile pictures and post images.")
+
+    Rel(user, igClone, "Uses")
+    Rel(igClone, cloudinary, "Loads images")
+
+    UpdateRelStyle(user, igClone, $textColor="black", $lineColor="gray", $offsetX="-40", $offsetY="-15")
+    UpdateRelStyle(igClone, cloudinary, $textColor="black", $lineColor="gray", $offsetX="-40", $offsetY="-15")
+
+    UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="1")

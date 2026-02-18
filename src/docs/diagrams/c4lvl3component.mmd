@@ -1,0 +1,69 @@
+C4Component
+    title Component Diagram — Angular SPA (IG Clone)
+
+    Person(user, "User", "Navigates and interacts with the app.")
+
+    Container_Boundary(router, "Angular Router") {
+        Component(appRouting, "AppRoutingModule", "RouterModule", "Routes: / → home, /login, /register, /home, /reels, /profile")
+    }
+
+    Container_Boundary(pages, "Pages") {
+        Component(homeComp, "HomeComponent", "Angular Component", "Layout shell: composes StoriesComponent, FeedComponent, UsuariosRecomendadosComponent.")
+        Component(feedComp, "FeedComponent", "Angular Component", "Renders feed posts. Handles likes (toggle) and comment submission via ReactiveForms.")
+        Component(storiesComp, "StoriesComponent", "Angular Component", "Displays story avatars. Modal viewer with auto-advance (3s timeout) and progress bars.")
+        Component(navComp, "NavComponent", "Angular Component", "Sidebar/topbar nav. Contains search modal with live user filtering via ngModel.")
+        Component(profileComp, "ProfileComponent", "Angular Component", "Displays selected user's profile picture, name, and post grid.")
+        Component(usuariosComp, "UsuariosRecomendadosComponent", "Angular Component", "Sidebar list of all users for discovery/navigation.")
+        Component(loginComp, "LoginComponent", "Angular Component", "Placeholder — not yet implemented.")
+        Component(registerComp, "RegisterComponent", "Angular Component", "Placeholder — not yet implemented.")
+    }
+
+    Container_Boundary(services, "Services") {
+        Component(userService, "UserService", "Injectable", "Generates mock users, feed, stories. Manages selected profile, search results, post likes/comments.")
+        Component(redirectsService, "RedirectsService", "Injectable", "Thin wrapper around Angular Router.navigate().")
+    }
+
+    Rel(user, navComp, "Searches")
+    Rel(user, feedComp, "Likes / comments")
+    Rel(user, storiesComp, "Views stories")
+    Rel(user, profileComp, "Views profile")
+
+    Rel(appRouting, homeComp, "/home")
+    Rel(appRouting, profileComp, "/profile")
+    Rel(appRouting, loginComp, "/login")
+    Rel(appRouting, registerComp, "/register")
+
+    Rel(homeComp, feedComp, "Includes")
+    Rel(homeComp, storiesComp, "Includes")
+    Rel(homeComp, usuariosComp, "Includes")
+    Rel(homeComp, navComp, "Includes")
+    Rel(profileComp, navComp, "Includes")
+
+    Rel(feedComp, userService, "Reads / mutates")
+    Rel(storiesComp, userService, "Reads stories")
+    Rel(navComp, userService, "Filters users")
+    Rel(profileComp, userService, "Reads profile")
+    Rel(usuariosComp, userService, "Reads users")
+    Rel(userService, redirectsService, "Navigates")
+
+    UpdateRelStyle(user, navComp, $textColor="black", $lineColor="gray", $offsetX="-40", $offsetY="-12")
+    UpdateRelStyle(user, feedComp, $textColor="black", $lineColor="gray", $offsetX="-50", $offsetY="-12")
+    UpdateRelStyle(user, storiesComp, $textColor="black", $lineColor="gray", $offsetX="-45", $offsetY="-12")
+    UpdateRelStyle(user, profileComp, $textColor="black", $lineColor="gray", $offsetX="-45", $offsetY="-12")
+    UpdateRelStyle(appRouting, homeComp, $textColor="black", $lineColor="gray", $offsetX="-20", $offsetY="-12")
+    UpdateRelStyle(appRouting, profileComp, $textColor="black", $lineColor="gray", $offsetX="-25", $offsetY="-12")
+    UpdateRelStyle(appRouting, loginComp, $textColor="black", $lineColor="gray", $offsetX="-20", $offsetY="-12")
+    UpdateRelStyle(appRouting, registerComp, $textColor="black", $lineColor="gray", $offsetX="-25", $offsetY="-12")
+    UpdateRelStyle(homeComp, feedComp, $textColor="black", $lineColor="gray", $offsetX="-30", $offsetY="-12")
+    UpdateRelStyle(homeComp, storiesComp, $textColor="black", $lineColor="gray", $offsetX="-30", $offsetY="-12")
+    UpdateRelStyle(homeComp, usuariosComp, $textColor="black", $lineColor="gray", $offsetX="-30", $offsetY="-12")
+    UpdateRelStyle(homeComp, navComp, $textColor="black", $lineColor="gray", $offsetX="-30", $offsetY="-12")
+    UpdateRelStyle(profileComp, navComp, $textColor="black", $lineColor="gray", $offsetX="-30", $offsetY="-12")
+    UpdateRelStyle(feedComp, userService, $textColor="black", $lineColor="gray", $offsetX="-45", $offsetY="-12")
+    UpdateRelStyle(storiesComp, userService, $textColor="black", $lineColor="gray", $offsetX="-40", $offsetY="-12")
+    UpdateRelStyle(navComp, userService, $textColor="black", $lineColor="gray", $offsetX="-40", $offsetY="-12")
+    UpdateRelStyle(profileComp, userService, $textColor="black", $lineColor="gray", $offsetX="-40", $offsetY="-12")
+    UpdateRelStyle(usuariosComp, userService, $textColor="black", $lineColor="gray", $offsetX="-35", $offsetY="-12")
+    UpdateRelStyle(userService, redirectsService, $textColor="black", $lineColor="gray", $offsetX="-35", $offsetY="-12")
+
+    UpdateLayoutConfig($c4ShapeInRow="4", $c4BoundaryInRow="2")

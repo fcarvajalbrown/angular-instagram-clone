@@ -1,0 +1,24 @@
+C4Dynamic
+    title Dynamic Diagram — Like Toggle Flow (IG Clone)
+
+    Person(user, "User", "Clicks the ❤️ button on a post.")
+
+    Container_Boundary(spa, "Angular SPA") {
+        Component(feedComp, "FeedComponent", "Angular Component", "Handles like button click event.")
+        Component(userService, "UserService", "Injectable", "Stores feedPosts array in memory.")
+    }
+
+    RelIndex(1, user, feedComp, "Click ❤️")
+    RelIndex(2, feedComp, userService, "find(post)")
+    RelIndex(3, userService, feedComp, "post ref")
+    RelIndex(4, feedComp, feedComp, "check admin like")
+    RelIndex(5, feedComp, userService, "splice / push like")
+    RelIndex(6, userService, feedComp, "change detection")
+    RelIndex(7, feedComp, user, "UI updated")
+
+    UpdateRelStyle(user, feedComp, $textColor="black", $lineColor="gray", $offsetX="-30", $offsetY="-12")
+    UpdateRelStyle(feedComp, userService, $textColor="black", $lineColor="gray", $offsetX="-30", $offsetY="-12")
+    UpdateRelStyle(userService, feedComp, $textColor="black", $lineColor="gray", $offsetX="10", $offsetY="-12")
+    UpdateRelStyle(feedComp, feedComp, $textColor="black", $lineColor="gray", $offsetX="10", $offsetY="-25")
+
+    UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="1")
